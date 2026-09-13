@@ -1,4 +1,5 @@
 import socket
+import os
 
 
 class Client:
@@ -13,8 +14,14 @@ class Client:
         self.client.connect((set_ip, set_port))
         print(f"Успешное подключение!")
 
+        message = input(f"{os.getlogin()}: ").encode("utf-8")
+        self.client.send(message)
+        print("Сообщение отправлено!")
+
+
         self.client.close()
 
 
 client = Client()
 client.connect()
+
