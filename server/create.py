@@ -9,8 +9,7 @@ class Server:
 
 
     def set_value(self):
-        get_host = socket.gethostname()
-        self.local_ip = socket.gethostbyname(get_host)
+        self.local_ip = input(f"Set the ip: ")
         self.port = int(input(f"Set the port: "))
 
 
