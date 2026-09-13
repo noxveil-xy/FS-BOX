@@ -19,10 +19,10 @@ class Server:
         user, adress = self.server.accept()
         print(f"{user} {adress}")
 
-        data = self.server.recv(1024)
-        get_message = data.decode("utf-8")
+        data = user.recv(1024).decode("utf-8")
+        #get_message = data.decode("utf-8")
         print(f"+1 сообщение")
-        print(get_message)
+        print(data)
 
         self.server.close()
 
