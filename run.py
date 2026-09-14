@@ -1,3 +1,4 @@
+#ИМПОРТЫ ------------------------------
 import os
 import sys
 
@@ -5,6 +6,7 @@ from client.client import client_obj
 from server.server import cr_server
 
 
+#ТОЧКА ВХОДА ---------------------------------------------------------------
 if __name__ == "__main__":
     try:
 
@@ -17,6 +19,8 @@ if __name__ == "__main__":
             case _:
                 print("Не подходящее значение..")
 
+
+    #ОБРАБОТКА ОШИБОК---------------------------------------------------------
     except IndexError:
         print(f"\nОшибка: нужно задать параметр (-sever / -client).\n")
     except KeyboardInterrupt:
