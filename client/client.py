@@ -15,16 +15,14 @@ class Client:
     #ОТПРАВКА И ПРИЕМ СООБЩЕНИЙ С СЕРВЕРА ---------------------------------------------
     def write_client(self, ip, port, user_server):
         while True:
-            # current_time = time.time()
-            # local_time = time.localtime(current_time)
-            # decode_time = time.strftime("%Y-%m-%d %H:%M:%S", local_time)
-
-            # message = input(f"{self.user_name}@{ip}:{port}: ")
-            # res_message = f"[{decode_time}] [{self.user_name}] {message}"
+            current_time = time.time()
+            local_time = time.localtime(current_time)
+            decode_time = time.strftime("%Y-%m-%d %H:%M:%S", local_time)
 
             message = input(f"{user_server}@{ip}:{port}: ")
-            
+            res_message = f"[{decode_time}] [{self.user_name}] {message}"
 
+            
             #ОТПРАВЛЯЕМ --------------------------------------
             self.client.send(res_message.encode("utf-8"))
             
@@ -43,7 +41,6 @@ class Client:
 
         self.client.connect((set_ip, set_port))
         get_user_server = self.client.recv(1024).decode("utf-8")
-        print(get_user_server)
 
         self.write_client(set_ip, set_port, get_user_server)
 

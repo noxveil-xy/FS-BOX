@@ -24,7 +24,6 @@ class Server:
         while True:
             user, adress = self.server.accept()
             send_user = user.send(self.get_user.encode("utf-8"))
-            print(send_user)
 
 
             while user:
@@ -36,7 +35,7 @@ class Server:
                     print(decode_data)
                     message = "ok"
 
-                    # response_cl = user.send(message.encode("utf-8"))
+                    response_cl = user.send(message.encode("utf-8"))
 
         self.server.close()
 
