@@ -49,7 +49,7 @@ class Server:
 
         #ПОДКЛЮЧЕНИЯ ------------
         self.server.listen(5)
-        self.user_channel(get_user)
+        self.user_channel()
 
 
 #ОБЪЕКТ СЕРВЕРА -------
