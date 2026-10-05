@@ -1,5 +1,6 @@
 #ИМПОРТЫ---------
 import socket
+import os
 
 
 #КЛАСС СЕРВЕРА -----------------------------------------------------------
@@ -21,6 +22,9 @@ class Server:
         while True:
             user, adress = self.server.accept()
 
+            get_user = os.getlogin()
+            send_user = user.send(get_user.encode("utf-8"))
+
             while user:
                 data = user.recv(1024)
                 if len(data) <= 1:
@@ -29,7 +33,8 @@ class Server:
                     decode_data = data.decode("utf-8")
                     print(decode_data)
                     message = "ok"
-                    response_cl = user.send(message.encode("utf-8"))
+
+                    # response_cl = user.send(message.encode("utf-8"))
 
         self.server.close()
 
