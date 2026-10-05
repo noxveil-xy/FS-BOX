@@ -7,6 +7,7 @@ import os
 class Server:
     def __init__(self):
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.get_user = os.getlogin()
         self.local_ip = None
         self.port = None
 
@@ -19,11 +20,12 @@ class Server:
 
     #РАБОТА С КАНАЛОМ ДОЧЕРНЕГО СОКЕТА КЛИЕНТА (ПРИЕМ СООБЩЕНИЙ) -------------
     def user_channel(self):
+
         while True:
             user, adress = self.server.accept()
+            send_user = user.send(self.get_user.encode("utf-8"))
+            print(send_user)
 
-            get_user = os.getlogin()
-            send_user = user.send(get_user.encode("utf-8"))
 
             while user:
                 data = user.recv(1024)
@@ -44,9 +46,10 @@ class Server:
         self.server.bind((self.local_ip, self.port))
         print(f"\n[СЕРВЕР ЗАПУЩЕН: {self.local_ip}:{self.port}]\n")
 
+
         #ПОДКЛЮЧЕНИЯ ------------
         self.server.listen(5)
-        self.user_channel()
+        self.user_channel(get_user)
 
 
 #ОБЪЕКТ СЕРВЕРА -------

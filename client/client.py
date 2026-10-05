@@ -43,6 +43,7 @@ class Client:
 
         self.client.connect((set_ip, set_port))
         get_user_server = self.client.recv(1024).decode("utf-8")
+        print(get_user_server)
 
         self.write_client(set_ip, set_port, get_user_server)
 
