@@ -2,6 +2,7 @@
 import socket
 import os
 
+from servers.path import ROOT_PATH, PATH_FILES_SERVER
 from storage.commands import comms
 
 
@@ -36,12 +37,20 @@ class Server:
                 if len(data) <= 1:
                     break
                 else:
-                    
                     decode_data = data.decode("utf-8")
+                    value_decode_data = decode_data.split(" ")[3]
                     print(decode_data)
+
                     
-                    
-                    response_cl = user.send(status.encode("utf-8"))
+                    if value_decode_data == comms[1]:
+                        server_res = f"{os.getcwd()}\n"
+                    elif value_decode_data == comms[2]:
+                        server_res = f"{os.listdir(PATH_FILES_SERVER)}\n"
+                    else:
+                        server_res = "ERR"
+
+            
+                    response_cl = user.send(server_res.encode("utf-8"))
 
         self.server.close()
 

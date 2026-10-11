@@ -3,7 +3,7 @@ import os
 import sys
 
 from client.client import client_obj
-from server.server import cr_server
+from servers.server import cr_server
 
 
 #ТОЧКА ВХОДА ---------------------------------------------------------------

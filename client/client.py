@@ -4,6 +4,8 @@ import os
 import time
 import sys
 
+from storage.commands import comms, comms_help
+
 
 #КЛАСС КЛИЕНТА ------------------------------------------------------------
 class Client:
@@ -20,16 +22,28 @@ class Client:
             decode_time = time.strftime("%Y-%m-%d %H:%M:%S", local_time)
 
             message = input(f"[{decode_time}] [{user_server}@{ip}:{port}]: ")
-            res_message = f"[{decode_time}] [{self.user_name}] {message}"
 
-            
-            #ОТПРАВЛЯЕМ --------------------------------------
-            self.client.send(res_message.encode("utf-8"))
-            
-            #ПОЛУЧАЕМ --------------------------------------
-            data = self.client.recv(1024).decode("utf-8")
-            print(f"[{decode_time}] {data}")
-            
+
+            def request_in_server(value):
+                res_message = f"[{decode_time}] [{self.user_name}] {value}"
+
+                #ОТПРАВЛЯЕМ --------------------------------------
+                self.client.send(res_message.encode("utf-8"))
+                
+                #ПОЛУЧАЕМ --------------------------------------
+                data = self.client.recv(1024).decode("utf-8")
+                print(f"{data}")
+
+
+            if message in comms:
+                if message == comms[0]:
+                    print(comms_help)
+                elif message == comms[1]:
+                    request_in_server(message)
+                elif message == comms[2]:
+                    request_in_server(message)
+                else:
+                    print(f"\nОшибка: не подходящее значение..{comms_help}")
 
 
         self.client.close()
