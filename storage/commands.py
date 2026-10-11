@@ -1,0 +1,1 @@
+comms = ["help", "show", "NEW"]

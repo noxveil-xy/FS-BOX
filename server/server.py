@@ -2,6 +2,8 @@
 import socket
 import os
 
+from storage.commands import comms
+
 
 #КЛАСС СЕРВЕРА -----------------------------------------------------------
 class Server:
@@ -10,6 +12,7 @@ class Server:
         self.get_user = os.getlogin()
         self.local_ip = None
         self.port = None
+        self.status = None
 
 
     #ЗАДАЕМ ДАННЫЕ ДЛЯ ПРИВЯЗКИ К СОКЕТУ -----------
@@ -25,17 +28,20 @@ class Server:
             user, adress = self.server.accept()
             send_user = user.send(self.get_user.encode("utf-8"))
 
+            status = f"[{self.get_user}@{self.local_ip}:{self.port}]: получено ✓\n"
+
 
             while user:
                 data = user.recv(1024)
                 if len(data) <= 1:
                     break
                 else:
+                    
                     decode_data = data.decode("utf-8")
                     print(decode_data)
-                    message = "ok"
-
-                    response_cl = user.send(message.encode("utf-8"))
+                    
+                    
+                    response_cl = user.send(status.encode("utf-8"))
 
         self.server.close()
 

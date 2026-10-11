@@ -19,7 +19,7 @@ class Client:
             local_time = time.localtime(current_time)
             decode_time = time.strftime("%Y-%m-%d %H:%M:%S", local_time)
 
-            message = input(f"{user_server}@{ip}:{port}: ")
+            message = input(f"[{decode_time}] [{user_server}@{ip}:{port}]: ")
             res_message = f"[{decode_time}] [{self.user_name}] {message}"
 
             
@@ -28,6 +28,8 @@ class Client:
             
             #ПОЛУЧАЕМ --------------------------------------
             data = self.client.recv(1024).decode("utf-8")
+            print(f"[{decode_time}] {data}")
+            
 
 
         self.client.close()
